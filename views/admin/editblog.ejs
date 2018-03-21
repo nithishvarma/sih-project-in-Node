@@ -1,0 +1,39 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    $(".edits").find('.e').click(function(e){
+      var blogname =  $(this).siblings('.bn').html();
+      var topicname =$(this).siblings('.tn').html();
+      var subname = $(this).siblings('.sn').html();
+      $.post('./editblog/',{
+        topic:topicname,
+        subtopic:subname,
+        blogname:blogname,
+      },
+    function(data,status){
+      $(window).attr('location','./editblog/edit');
+    });
+
+ });
+});
+ </script>
+</head>
+<body>
+<% for(i=0;i< blogs.length;i++){ %>
+  <div class="edits">
+  <p class="bn"><%=blogs[i].blogname%></p><p>  </p>
+  <p class="tn"><%=blogs[i].topicname %></p><p>  </p>
+  <p class="sn"><%=blogs[i].subname%></p><p>  </p><html>
+  <button class="e">edit</button>
+  </div>
+<% } %>
+<div class="edits">
+<p class="bn">dfdf</p><p> </p>
+<p class="tn">dfdfd</p><p>  </p>
+<p class="sn">dfdfdfd</p><p>  </p>
+<button class="e">edit</button>
+</div>
+</body>
+</html>

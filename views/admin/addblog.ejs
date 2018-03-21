@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+  <script>
+  tinymce.init({
+    selector: '#mytextarea',
+    plugins:'code image',
+    toolbar: 'undo redo | styleselect | bold italic | link image',
+
+  });
+  </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function () {
+
+      $("#sh").click(function(e){
+
+        tinyMCE.triggerSave();
+        var t = $("#topic").val();
+        var st= $("#subtopic").val();
+        var bn= $("#blogname").val();
+        var content=tinymce.activeEditor.getContent();
+
+        $.post('./addblog/add',{
+          topic:t,
+          subtopic:st,
+          blogname:bn,
+          content:content
+        },
+      function(data,status){
+      $("#d").html(data);
+      });
+      });
+   });
+
+</script>
+</head>
+
+<body>
+<p id="d"> </p>
+<h1>blog</h1>
+    topic <input id="topic" type="text"><br />
+    subtopic<input id="subtopic" type="text"><br>
+    description <input  id="blogname" type="text"><br />
+
+    <br />
+    <textarea id="mytextarea"></textarea>
+    <button id="sh">submit</button>
+
+</body>
+</html>
